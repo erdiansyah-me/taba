@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:taba/presentation/pages/home_page/home_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
+import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 import 'package:taba/utils/style_config.dart';
 
 void main() {
@@ -18,6 +19,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: TabaThemes.lightTheme,
       home: MainPage(),
+      initialRoute: MainPage.routeName,
+      routes: {
+        MainPage.routeName:(context) => const MainPage(),
+        ProfilePage.routeName:(context) => const ProfilePage(),
+      },
     );
   }
 }

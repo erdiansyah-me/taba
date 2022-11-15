@@ -11,7 +11,8 @@ class TabaThemes {
       elevation: 0,
       backgroundColor: ColorSystem.primaryDark,
       systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: ColorSystem.primaryDark
+        statusBarColor: ColorSystem.primaryDark,
+        systemStatusBarContrastEnforced: true,
       ),
       titleTextStyle: TextStyle(
         color: Colors.black,
@@ -20,9 +21,14 @@ class TabaThemes {
         fontWeight: FontWeight.w900,
       ),
     ),
+    focusColor: ColorSystem.backgroundLight,
+    backgroundColor: ColorSystem.backgroundDark,
+    cardColor: ColorSystem.mediumGrey,
     unselectedWidgetColor: ColorSystem.mediumGrey,
     dialogBackgroundColor: ColorSystem.primaryDark,
     dividerColor: ColorSystem.mediumGrey,
+    highlightColor: ColorSystem.lightGrey.withOpacity(0.5),
+    indicatorColor: ColorSystem.backgroundLight,
   );
   static final lightTheme = ThemeData(
     primaryColor: ColorSystem.primary,
@@ -38,12 +44,18 @@ class TabaThemes {
         fontWeight: FontWeight.w900,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: ColorSystem.backgroundLight,
+        statusBarColor: ColorSystem.primaryLight,
+        systemStatusBarContrastEnforced: true,
       )
     ),
+    focusColor: ColorSystem.backgroundDark,
+    backgroundColor: ColorSystem.backgroundLight,
+    cardColor: ColorSystem.backgroundLight,
     unselectedWidgetColor: ColorSystem.mediumGrey,
     dialogBackgroundColor: ColorSystem.primaryLight,
     dividerColor: ColorSystem.mediumGrey,
+    highlightColor: ColorSystem.lightGrey.withOpacity(0.5),
+    indicatorColor: ColorSystem.primary,
   );
 }
 
