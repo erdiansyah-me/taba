@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "727107509123",
+    "project_id": "taba-23679",
+    "storage_bucket": "taba-23679.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727107509123:android:e1256a06537922dbc0b4b6",
+        "android_client_info": {
+          "package_name": "com.example.taba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727107509123-3m3khvirf345lsmq4nau5vlv1p87ij2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg5YuBTHLemwjkZ7l3NThhSuQWQIBqy18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727107509123-3m3khvirf345lsmq4nau5vlv1p87ij2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
