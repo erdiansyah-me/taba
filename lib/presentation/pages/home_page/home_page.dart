@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
+import 'package:taba/presentation/pages/auth_page/register_page.dart';
 
 import '../../../utils/style_config.dart';
 
@@ -71,6 +72,9 @@ class HomePage extends StatelessWidget {
                         'assets/icons/ic_kategori.png',
                         'Kategori Bencana',
                         'Kenali beberapa kategori bencana alam yang dapat terjadi agar kita lebih waspada dan tetap tenang',
+                        (() {
+                          
+                        })
                       ),
                       SizedBox(height: 8.h,),
                       _listItem(
@@ -78,6 +82,9 @@ class HomePage extends StatelessWidget {
                         'assets/icons/ic_evac.png',
                         'Evakuasi? Tetap tenang dan sesuai prosedur',
                         'Evakuasi massa yang sembarangan dan tidak teratur membuat proses evakuasi menjadi terhambat!',
+                        (() {
+                          
+                        })
                       ),
                       SizedBox(height: 8.h,),
                       _listItem(
@@ -85,6 +92,9 @@ class HomePage extends StatelessWidget {
                         'assets/icons/ic_important.png',
                         'Ketahui Nomor Instansi Darurat!',
                         'Pentingnya Mengetahui tentang nomor instansi darurat terdekat, agar penanganan lebih cepat!',
+                        (() {
+                          
+                        })
                       ),
                     ],
                   ),
@@ -102,12 +112,11 @@ class HomePage extends StatelessWidget {
     String icon,
     String title,
     String subtitle,
+    Function() onTap
   ) {
     return InkWell(
       // hoverColor: Theme.of(context).backgroundColor,
-      onTap: () {
-        //TODO: ONTAP
-      },
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(20.r),
         decoration: BoxDecoration(

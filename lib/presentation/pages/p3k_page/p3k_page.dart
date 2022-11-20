@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_page.dart';
 import 'package:taba/presentation/widget/grid_card_item.dart';
 
 import '../../../utils/style_config.dart';
@@ -71,7 +72,7 @@ class P3kPage extends StatelessWidget {
                   InkWell(
                     hoverColor: Theme.of(context).backgroundColor,
                     onTap: () {
-                          //TODO: ONTAP
+                          Navigator.pushNamed(context, P3kListPage.routeName);
                         },
                     child: Container(
                       padding: EdgeInsets.all(12.r),

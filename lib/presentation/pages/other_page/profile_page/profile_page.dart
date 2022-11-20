@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/utils/style_config.dart';
 
 class ProfilePage extends StatelessWidget {
-  static const routeName = 'Profile_Page';
+  static const routeName = '/profile_page';
 
   const ProfilePage({super.key});
 

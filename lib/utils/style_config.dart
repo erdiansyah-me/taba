@@ -12,7 +12,6 @@ class TabaThemes {
       backgroundColor: ColorSystem.primaryDark,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: ColorSystem.primaryDark,
-        systemStatusBarContrastEnforced: true,
       ),
       titleTextStyle: TextStyle(
         color: Colors.black,
@@ -23,7 +22,7 @@ class TabaThemes {
     ),
     focusColor: ColorSystem.backgroundLight,
     backgroundColor: ColorSystem.backgroundDark,
-    cardColor: ColorSystem.mediumGrey,
+    cardColor: ColorSystem.darkGrey,
     unselectedWidgetColor: ColorSystem.mediumGrey,
     dialogBackgroundColor: ColorSystem.primaryDark,
     dividerColor: ColorSystem.mediumGrey,
@@ -45,7 +44,6 @@ class TabaThemes {
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: ColorSystem.primaryLight,
-        systemStatusBarContrastEnforced: true,
       )
     ),
     focusColor: ColorSystem.backgroundDark,
@@ -53,7 +51,7 @@ class TabaThemes {
     cardColor: ColorSystem.backgroundLight,
     unselectedWidgetColor: ColorSystem.mediumGrey,
     dialogBackgroundColor: ColorSystem.primaryLight,
-    dividerColor: ColorSystem.mediumGrey,
+    dividerColor: ColorSystem.lightGrey,
     highlightColor: ColorSystem.lightGrey.withOpacity(0.5),
     indicatorColor: ColorSystem.primary,
   );

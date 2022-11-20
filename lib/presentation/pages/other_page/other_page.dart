@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taba/presentation/pages/auth_page/auth.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 
 import '../../../utils/style_config.dart';
@@ -121,8 +123,8 @@ class OtherPage extends StatelessWidget {
                     _othersItem(
                       Icons.logout,
                       'Logout',
-                      (() {
-                        //TODO: ontap
+                      (() async {
+                        await FirebaseAuth.instance.signOut();
                       })
                     ),
                   ],

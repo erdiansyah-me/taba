@@ -10,7 +10,7 @@ import 'package:taba/utils/style_config.dart';
 
 class MainPage extends StatefulWidget {
 
-  static const routeName = 'Main_Page';
+  static const routeName = '/main_page';
 
   const MainPage({super.key});
 
