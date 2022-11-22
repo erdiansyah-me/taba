@@ -7,6 +7,7 @@ import 'package:taba/presentation/pages/auth_page/auth.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 
 import '../../../utils/style_config.dart';
+import '../settings_page/settings_page.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({super.key});
@@ -99,9 +100,9 @@ class OtherPage extends StatelessWidget {
                     _othersItem(
                       Icons.settings,
                       'Pengaturan',
-                      (() {
-                        //TODO: ontap
-                      })
+                        (() async {
+                          Navigator.pushNamed(context, SettingsPage.routeName);
+                        })
                     ),
                     Divider(thickness: 0.5.h,),
                     _othersItem(

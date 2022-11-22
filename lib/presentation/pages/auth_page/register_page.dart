@@ -8,6 +8,7 @@ import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
 import '../../../utils/style_config.dart';
+import '../login_page/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register_page';
@@ -301,7 +302,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      //TODO: ONTAP
+                                      Navigator.pushNamed(context, LoginPage.routeName);
                                     },
                                 ),
                               ],

@@ -1,8 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
+import '../../../utils/style_config.dart';
+
 class LoginPage extends StatefulWidget {
+  static const routeName = 'Login_Page';
   const LoginPage({super.key});
 
   @override
@@ -57,9 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       width: 300,
-                      height: 42,
+                      height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white54,
                         borderRadius: BorderRadius.circular(40)
                       ),
                       child: TextFormField(
@@ -71,11 +75,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      margin: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.only(top: 20),
                       width: 300,
-                      height: 42,
+                      height: 50,
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.white54,
                           borderRadius: BorderRadius.circular(40)
                       ),
                     child: TextFormField(
@@ -89,8 +93,35 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const Text("Tidak punya akun?"),
-                  const Text("daftar disini", style: TextStyle(color: Color.fromRGBO(84,90,249,1.000))),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontFamily: 'opensans',
+                        fontWeight: FontWeight.w400,
+                        color: ColorSystem.mediumGrey,
+                      ),
+                      children: [
+                        const TextSpan(text: 'Tidak Punya Akun? '),
+                        TextSpan(
+                          text: 'Daftar Disini',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontFamily: 'opensans',
+                            fontWeight: FontWeight.w400,
+                            color: Colors.lightBlue,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, MainPage.routeName);
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -102,7 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(14),
                         splashColor: Colors.white,
-                        onTap: () => {},
+                        onTap: () => {
+                        Navigator.pushNamed(context, MainPage.routeName),
+                      },
                         child: const Center(
                           child: Text(
                             "Masuk", style: TextStyle(fontFamily: 'open sans',fontSize: 20, color: Color.fromRGBO(235,235,235,1.000)),
