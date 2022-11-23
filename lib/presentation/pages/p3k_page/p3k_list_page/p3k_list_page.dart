@@ -23,7 +23,8 @@ class P3kListPage extends StatelessWidget {
           title: const Text('P3K'),
           centerTitle: false,
         ),
-        body: Padding(
+        body: Container(
+          color: Theme.of(context).backgroundColor,
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
@@ -41,14 +42,14 @@ class P3kListPage extends StatelessWidget {
                         onChanged: (value) {
                           //TODO: onchanged
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Pencarian',
                           hintStyle: TextStyle(
                             fontFamily: 'opensans',
-                            color: ColorSystem.mediumGrey,
+                            color: Theme.of(context).secondaryHeaderColor,
                           ),
                           border: InputBorder.none,
-                          suffixIcon: Icon(Icons.search, color: ColorSystem.secondary,),
+                          suffixIcon: Icon(Icons.search, color: Theme.of(context).splashColor,),
                         ),
                       ),
                     ),

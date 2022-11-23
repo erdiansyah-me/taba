@@ -40,8 +40,14 @@ class _MainPageState extends State<MainPage> {
         body: _listPages[_bottomNavIndex],
         bottomNavigationBar: BottomNavigationBar(
           showUnselectedLabels: true,
+          showSelectedLabels: true,
+          selectedFontSize: 12.sp,
           unselectedItemColor: ColorSystem.mediumGrey,
-          selectedItemColor: ColorSystem.backgroundDark,
+          selectedItemColor: Theme.of(context).focusColor,
+          selectedLabelStyle: TextStyle(
+            fontFamily: 'opensans',
+            color: Theme.of(context).focusColor
+          ),
           currentIndex: _bottomNavIndex,
           onTap: _onBottomNavTapped,
           items: [

@@ -50,6 +50,7 @@ class GridCardItem extends StatelessWidget {
                 fontFamily: 'opensans',
                 fontWeight: FontWeight.w700,
                 fontSize: 16.sp,
+                color: Theme.of(context).focusColor
               ),
             )
           ],

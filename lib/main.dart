@@ -19,7 +19,7 @@ import 'package:taba/utils/style_config.dart';
 import 'package:taba/injection.dart' as di;
 
 import 'data/preferences/preferences_helper.dart';
-import 'data/provider/preferences_provider.dart';
+import 'presentation/provider/preferences_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

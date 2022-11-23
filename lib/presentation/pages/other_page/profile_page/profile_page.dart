@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:taba/utils/style_config.dart';
 
 import '../../../bloc/user_data_cubit.dart';
+import '../../../provider/preferences_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -32,8 +34,13 @@ class _ProfilePageState extends State<ProfilePage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).backgroundColor,
+              if (Provider.of<PreferencesProvider>(context).isDarkTheme) ...[
+                Theme.of(context).backgroundColor,
+                Theme.of(context).backgroundColor,
+              ] else ...[
+                Theme.of(context).primaryColor,
+                Theme.of(context).backgroundColor,
+              ],
             ],
             center: Alignment.bottomLeft,
             stops: const [
@@ -87,6 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Icon(
                                   Icons.person,
                                   size: 80.w,
+                                  color: Theme.of(context).focusColor,
                                 )
                               ] else ...[
                                 CachedNetworkImage(
@@ -109,6 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontFamily: 'opensans',
                                 fontWeight: FontWeight.w900,
                                 fontSize: 18.sp,
+                                color: Theme.of(context).focusColor,
                               ),
                             ),
                             Text(
@@ -212,6 +221,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontFamily: 'opensans',
                     fontWeight: FontWeight.w400,
                     fontSize: 14.sp,
+                    color: Theme.of(context).focusColor,
                   ),
                 ),
               ),

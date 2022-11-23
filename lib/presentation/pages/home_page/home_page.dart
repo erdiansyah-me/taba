@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 import 'package:taba/presentation/bloc/user_data_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/register_page.dart';
+import 'package:taba/presentation/provider/preferences_provider.dart';
 
 import '../../../utils/style_config.dart';
 
@@ -31,8 +33,13 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Theme.of(context).primaryColor.withAlpha(100),
-              Theme.of(context).backgroundColor,
+              if (Provider.of<PreferencesProvider>(context).isDarkTheme) ...[
+                Theme.of(context).backgroundColor,
+                Theme.of(context).backgroundColor,
+              ] else ...[
+                Theme.of(context).primaryColor.withAlpha(100),
+                Theme.of(context).backgroundColor,
+              ],
             ],
             center: Alignment.centerLeft,
             stops: const [
@@ -62,6 +69,7 @@ class _HomePageState extends State<HomePage> {
                         fontFamily: 'opensans',
                         fontWeight: FontWeight.w900,
                         fontSize: 16.sp,
+                        color: Theme.of(context).focusColor
                       ),
                     ),
                   ),
@@ -179,13 +187,14 @@ class _HomePageState extends State<HomePage> {
                     fontFamily: 'opensans',
                     fontWeight: FontWeight.w900,
                     fontSize: 16.sp,
+                    color: Theme.of(context).focusColor,
                   ),
                 ),
                 Text(
                   subtitle,
                   style: TextStyle(
                     fontFamily: 'opensans',
-                    color: ColorSystem.mediumGrey,
+                    color: Theme.of(context).secondaryHeaderColor,
                     fontWeight: FontWeight.w400,
                     fontSize: 12.sp,
                   ),

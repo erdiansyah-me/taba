@@ -13,6 +13,8 @@ class P3kPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
           children: [
             Container(
@@ -24,6 +26,7 @@ class P3kPage extends StatelessWidget {
                   fontFamily: 'opensans',
                   fontSize: 22.sp,
                   fontWeight: FontWeight.w900,
+                  color: Theme.of(context).focusColor
                 ),
               ),
             ),
@@ -106,6 +109,7 @@ class P3kPage extends StatelessWidget {
                                     fontFamily: 'opensans',
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.sp,
+                                    color: Theme.of(context).focusColor,
                                   ),
                                 ),
                               ),

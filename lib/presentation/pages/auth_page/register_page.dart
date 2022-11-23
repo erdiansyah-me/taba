@@ -2,11 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
 import '../../../utils/style_config.dart';
+import '../../provider/preferences_provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register_page';
@@ -35,8 +37,13 @@ class _RegisterPageState extends State<RegisterPage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Theme.of(context).backgroundColor,
-              Theme.of(context).primaryColor,
+              if (Provider.of<PreferencesProvider>(context).isDarkTheme) ...[
+                Theme.of(context).backgroundColor,
+                Theme.of(context).backgroundColor,
+              ] else ...[
+                Theme.of(context).backgroundColor,
+                Theme.of(context).primaryColor,
+              ],
             ],
             center: Alignment.centerRight,
             stops: const [
@@ -65,6 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 24.sp,
                     fontFamily: 'opensans',
                     fontWeight: FontWeight.w900,
+                    color: Theme.of(context).focusColor,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -97,11 +105,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       }
                                       return null;
                                     },
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       hintText: 'nama pengguna',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
+                                        color: Theme.of(context).secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                     ),
@@ -134,11 +142,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       }
                                       return null;
                                     },
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       hintText: 'email',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
+                                        color: Theme.of(context).secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                     ),
@@ -175,9 +183,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     },
                                     decoration: InputDecoration(
                                       hintText: 'kata sandi',
-                                      hintStyle: const TextStyle(
+                                      hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
+                                        color: Theme.of(context).secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                       suffixIcon: isObscurePassword
@@ -237,9 +245,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     },
                                     decoration: InputDecoration(
                                       hintText: 'konfirmasi kata sandi',
-                                      hintStyle: const TextStyle(
+                                      hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
+                                        color: Theme.of(context).secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                       suffixIcon: isObscureConfirmPassword

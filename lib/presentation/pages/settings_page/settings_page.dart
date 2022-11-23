@@ -2,8 +2,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taba/utils/style_config.dart';
 
-import '../../../data/provider/preferences_provider.dart';
+import '../../provider/preferences_provider.dart';
 import '../../widget/platform_widget.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: const Text(settingsTitle),
       ),
@@ -36,13 +38,17 @@ class SettingsPage extends StatelessWidget {
         return ListView(
           children: [
             Material(
-              child: ListTile(
-                title: const Text('Dark Theme'),
-                trailing: Switch.adaptive(
-                  value: provider.isDarkTheme,
-                  onChanged: (value) {
-                    provider.enableDarkTheme(value);
-                  },
+              child: Container(
+                color: Theme.of(context).backgroundColor,
+                child: ListTile(
+                  title: Text('Dark Theme', style: TextStyle(color: Theme.of(context).focusColor),),
+                  trailing: Switch.adaptive(
+                    activeColor: ColorSystem.primary,
+                    value: provider.isDarkTheme,
+                    onChanged: (value) {
+                      provider.enableDarkTheme(value);
+                    },
+                  ),
                 ),
               ),
             ),

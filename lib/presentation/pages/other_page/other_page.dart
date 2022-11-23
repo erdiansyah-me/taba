@@ -29,6 +29,7 @@ class _OtherPageState extends State<OtherPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           title: const Text('Lainnya'),
           centerTitle: false,
@@ -79,6 +80,7 @@ class _OtherPageState extends State<OtherPage> {
                                 Icon(
                                   Icons.person,
                                   size: 60.w,
+                                  color: Theme.of(context).focusColor,
                                 )
                               ] else ...[
                                 CachedNetworkImage(
@@ -100,6 +102,7 @@ class _OtherPageState extends State<OtherPage> {
                                       fontFamily: 'opensans',
                                       fontWeight: FontWeight.w900,
                                       fontSize: 18.sp,
+                                      color: Theme.of(context).focusColor
                                     ),
                                   ),
                                   Text(
@@ -107,14 +110,14 @@ class _OtherPageState extends State<OtherPage> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: 'opensans',
-                                      color: ColorSystem.mediumGrey,
+                                      color: Theme.of(context).secondaryHeaderColor,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12.sp,
                                     ),
                                   ),
                                 ]),
                               ),
-                              const Icon(Icons.arrow_forward_ios)
+                              Icon(Icons.arrow_forward_ios, color: Theme.of(context).focusColor,),
                             ],
                           ),
                         ),
