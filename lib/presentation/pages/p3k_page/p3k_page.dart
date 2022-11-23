@@ -100,7 +100,7 @@ class P3kPage extends StatelessWidget {
                             Expanded(
                               child: Center(
                                 child: Text(
-                                  'Penanganan\nPertama pada\nKorban',
+                                  'Pertolongan\nPertama pada\nKorban',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: 'opensans',

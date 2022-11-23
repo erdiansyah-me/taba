@@ -1,14 +1,29 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/utils/style_config.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../../../bloc/user_data_cubit.dart';
+
+class ProfilePage extends StatefulWidget {
   static const routeName = '/profile_page';
 
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<UserDataCubit>().getUserData());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,96 +66,110 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 24.h),
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // CachedNetworkImage(
-                        //   imageUrl: '',
-                        //   imageBuilder: (context, imageProvider) =>
-                        //       CircleAvatar(
-                        //     backgroundImage: imageProvider,
-                        //   ),
-                        //   errorWidget: (context, url, error) => Image.asset(
-                        //   'assets/icons/plester.png',
-                        //   height: 60.h,
-                        // ),
-                        // ),
-                        Image.asset(
-                          'assets/icons/plester.png',
-                          height: 100.h,
+          body: BlocBuilder<UserDataCubit, UserDataState>(
+              builder: (context, state) {
+            if (state is UserDataLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is UserDataSuccess) {
+              final user = state.result;
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 24.h),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (user.photoURL == null) ...[
+                                Icon(
+                                  Icons.person,
+                                  size: 80.w,
+                                )
+                              ] else ...[
+                                CachedNetworkImage(
+                                  imageUrl: user.photoURL!,
+                                  width: 60.w,
+                                  imageBuilder: (context, imageProvider) =>
+                                      CircleAvatar(
+                                    backgroundImage: imageProvider,
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                              ],
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              user.displayName,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'opensans',
+                                fontWeight: FontWeight.w900,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                            Text(
+                              user.email,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'opensans',
+                                color: ColorSystem.mediumGrey,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 8.h,),
-                        Text(
-                          'Nama Pengguna',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'opensans',
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                        Text(
-                          'emailpengguna@mail.com',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'opensans',
-                            color: ColorSystem.mediumGrey,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor.withOpacity(0.6),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 24.h, horizontal: 12.w),
+                        child: Column(
+                          children: [
+                            _othersItem('Ubah Email Pengguna', (() {
+                              //TODO: ontap
+                            })),
+                            Divider(
+                              thickness: 0.5.h,
+                            ),
+                            _othersItem('Ubah Kata Sandi', (() {
+                              //TODO: ontap
+                            })),
+                            Divider(
+                              thickness: 0.5.h,
+                            ),
+                            _othersItem('Logout', (() {
+                              //TODO: ontap
+                            })),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor.withOpacity(0.6),
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(vertical: 24.h, horizontal: 12.w),
-                    child: Column(
-                      children: [
-                        _othersItem('Ubah Email Pengguna', (() {
-                          //TODO: ontap
-                        })),
-                        Divider(
-                          thickness: 0.5.h,
-                        ),
-                        _othersItem('Ubah Kata Sandi', (() {
-                          //TODO: ontap
-                        })),
-                        Divider(
-                          thickness: 0.5.h,
-                        ),
-                        _othersItem('Reset Kata Sandi', (() {
-                          //TODO: ontap
-                        })),
-                        Divider(
-                          thickness: 0.5.h,
-                        ),
-                        _othersItem('Logout', (() {
-                          //TODO: ontap
-                        })),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+              );
+            } else if (state is UserDataError) {
+              return Center(
+                child: Text('Error: ${state.message}'),
+              );
+            } else {
+              return Container();
+            }
+          }),
         ),
       ),
     );

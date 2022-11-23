@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:taba/presentation/pages/auth_page/register_page.dart';
-import 'package:taba/presentation/pages/home_page/home_page.dart';
+import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
 class Auth extends StatelessWidget {
@@ -16,7 +15,7 @@ class Auth extends StatelessWidget {
         if (snapshot.hasData) {
           return const MainPage();
         } else {
-          return const RegisterPage();
+          return const LoginPage();
         }
       },
     );

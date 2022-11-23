@@ -1,19 +1,30 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taba/domain/usecases/register_user.dart';
+import 'package:taba/domain/usecases/auth_user.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  static const registerSuccessMessage = 'Daftar Berhasil';
+  final AuthUser _authUser;
 
-  final RegisterUser _registerUser;
-
-  AuthCubit(this._registerUser) : super(AuthInitial());
+  AuthCubit(this._authUser) : super(AuthInitial());
   String _message = '';
   String get message => _message;
 
   Future<void> registerUser(String name, String email, String password) async {
     emit(AuthLoading());
-    final result = await _registerUser.execute(name, email, password);
+    final result = await _authUser.executeRegister(name, email, password);
+
+    result.fold(
+      (failure) => emit(AuthError(failure.message)),
+      (success) {
+        _message = success;
+        emit(AuthSuccess());
+      },
+    );
+  }
+
+  Future<void> loginUser(String email, String password) async {
+    emit(AuthLoading());
+    final result = await _authUser.executeLogin(email, password);
 
     result.fold(
       (failure) => emit(AuthError(failure.message)),
@@ -25,7 +36,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 }
 
-class AuthState extends Equatable {
+abstract class AuthState extends Equatable {
   AuthState();
 
   @override
@@ -33,7 +44,9 @@ class AuthState extends Equatable {
 }
 
 class AuthInitial extends AuthState {}
+
 class AuthLoading extends AuthState {}
+
 class AuthSuccess extends AuthState {}
 
 class AuthError extends AuthState {

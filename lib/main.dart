@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taba/firebase_options.dart';
+import 'package:taba/presentation/bloc/user_data_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/auth.dart';
 import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
+import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/auth_page/register_page.dart';
 import 'package:taba/presentation/pages/home_page/home_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
@@ -33,18 +35,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create:  (_) => di.locator<AuthCubit>(),
         ),
+        BlocProvider(create: (_) => di.locator<UserDataCubit>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: TabaThemes.lightTheme,
         home: const Auth(),
-        initialRoute: Auth.routeName,
         routes: {
           Auth.routeName:(context) => const Auth(),
           MainPage.routeName: (context) => const MainPage(),
           ProfilePage.routeName: (context) => const ProfilePage(),
           P3kListPage.routeName: (context) => const P3kListPage(),
           RegisterPage.routeName: (context) => const RegisterPage(),
+          LoginPage.routeName:(context) => const LoginPage(),
         },
       ),
     );

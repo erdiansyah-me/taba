@@ -21,10 +21,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _bottomNavIndex = 0;
   final List<Widget> _listPages = [
-    HomePage(),
-    P3kPage(),
-    MapsPage(),
-    OtherPage()
+    const HomePage(),
+    const P3kPage(),
+    const MapsPage(),
+    const OtherPage(),
   ];
   void _onBottomNavTapped(int index) {
     setState(() {

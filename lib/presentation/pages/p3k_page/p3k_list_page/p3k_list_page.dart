@@ -31,7 +31,7 @@ class P3kListPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
                       decoration: BoxDecoration(
                         color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(25.r),

@@ -3,26 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
-import 'package:taba/presentation/pages/auth_page/login_page.dart';
+import 'package:taba/presentation/pages/auth_page/register_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
 import '../../../utils/style_config.dart';
 
-class RegisterPage extends StatefulWidget {
-  static const routeName = '/register_page';
-  const RegisterPage({super.key});
+class LoginPage extends StatefulWidget {
+  static const routeName = '/login_page';
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _registerFormKey = GlobalKey<FormState>();
+  final _loginFormKey = GlobalKey<FormState>();
 
   bool isObscurePassword = true;
   bool isObscureConfirmPassword = true;
@@ -35,13 +33,13 @@ class _RegisterPageState extends State<RegisterPage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Theme.of(context).backgroundColor,
               Theme.of(context).primaryColor,
+              Theme.of(context).backgroundColor,
             ],
             center: Alignment.centerRight,
             stops: const [
-              0.2,
-              0.8,
+              0,
+              0.5,
             ],
             radius: 1.8.r,
           ),
@@ -60,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: 12.h,),
                 Text(
-                  'DAFTAR',
+                  'MASUK',
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: 'opensans',
@@ -70,47 +68,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 12.h),
                 Expanded(
                   child: Form(
-                    key: _registerFormKey,
+                    key: _loginFormKey,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.w),
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    left: 24.w,
-                                    right: 8.w,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).dividerColor,
-                                    borderRadius: BorderRadius.circular(25.r),
-                                  ),
-                                  child: TextFormField(
-                                    controller: _usernameController,
-                                    cursorColor:
-                                        Theme.of(context).backgroundColor,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'mohon masukkan nama pengguna';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                      hintText: 'nama pengguna',
-                                      hintStyle: TextStyle(
-                                        fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
-                                      ),
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 8.h),
                           Row(
                             children: [
                               Expanded(
@@ -209,70 +171,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 8.h),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    left: 24.w,
-                                    right: 8.w,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).dividerColor,
-                                    borderRadius: BorderRadius.circular(25.r),
-                                  ),
-                                  child: TextFormField(
-                                    obscureText: isObscureConfirmPassword,
-                                    controller: _confirmPasswordController,
-                                    cursorColor:
-                                        Theme.of(context).backgroundColor,
-                                    validator: (value) {
-                                      var pass = _passwordController.text;
-                                      var compare = value!.compareTo(pass);
-                                      if (compare != 0) {
-                                        return 'harus sama dengan kata sandi';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'konfirmasi kata sandi',
-                                      hintStyle: const TextStyle(
-                                        fontFamily: 'opensans',
-                                        color: ColorSystem.mediumGrey,
-                                      ),
-                                      border: InputBorder.none,
-                                      suffixIcon: isObscureConfirmPassword
-                                          ? GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  isObscureConfirmPassword =
-                                                      false;
-                                                });
-                                              },
-                                              child: const Icon(
-                                                Icons.visibility_off,
-                                                color: ColorSystem.secondary,
-                                              ),
-                                            )
-                                          : GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  isObscureConfirmPassword =
-                                                      true;
-                                                });
-                                              },
-                                              child: const Icon(
-                                                Icons.visibility,
-                                                color: ColorSystem.secondary,
-                                              ),
-                                            ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                           SizedBox(height: 4.h),
                           RichText(
                             text: TextSpan(
@@ -283,18 +181,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: ColorSystem.mediumGrey,
                               ),
                               children: [
-                                const TextSpan(text: 'Sudah Punya Akun? '),
+                                const TextSpan(text: 'Belum Punya Akun? '),
                                 TextSpan(
-                                  text: 'Masuk Disini',
+                                  text: 'Daftar Disini',
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     fontFamily: 'opensans',
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.lightBlue,
+                                    color: Colors.blue,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pushNamed(context, LoginPage.routeName);
+                                      Navigator.pushNamed(context, RegisterPage.routeName);
                                     },
                                 ),
                               ],
@@ -303,12 +201,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 12.h),
                           ElevatedButton(
                             onPressed: () async {
-                              if (_registerFormKey.currentState!.validate()) {
+                              if (_loginFormKey.currentState!.validate()) {
                                 
-                                context.read<AuthCubit>().registerUser(
-                                      _usernameController.text,
+                                context.read<AuthCubit>().loginUser(
                                       _emailController.text,
-                                      _confirmPasswordController.text,
+                                      _passwordController.text,
                                     );
                                 if (state is AuthLoading) {
                                   const Center(child: CircularProgressIndicator());
@@ -316,18 +213,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                 if (state is AuthSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Register Berhasil')),
+                                        content: Text('Login Berhasil')),
                                   );
                                   Navigator.pushReplacementNamed(context, MainPage.routeName);
                                 } else if (state is AuthError) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                        content: Text('Register Gagal: ${state.message}')),
+                                        content: Text('Login Gagal: ${state.message}')),
                                   );
                                 }
                                   // ScaffoldMessenger.of(context).showSnackBar(
                                   //   const SnackBar(
-                                  //       content: Text('Register Berhasil')));
+                                  //       content: Text('Login Berhasil')));
                               }
                             },
                             style: ButtonStyle(
@@ -341,7 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       )),
                             ),
                             child: Text(
-                              'Daftar',
+                              'Masuk',
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 fontFamily: 'opensans',
@@ -366,8 +263,6 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _usernameController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 }
