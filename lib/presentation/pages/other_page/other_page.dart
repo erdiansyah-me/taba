@@ -9,6 +9,7 @@ import 'package:taba/presentation/pages/auth_page/auth.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 
 import '../../../utils/style_config.dart';
+import '../settings_page/settings_page.dart';
 
 class OtherPage extends StatefulWidget {
   const OtherPage({super.key});
@@ -74,17 +75,6 @@ class _OtherPageState extends State<OtherPage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // CachedNetworkImage(
-                              //   imageUrl: '',
-                              //   imageBuilder: (context, imageProvider) =>
-                              //       CircleAvatar(
-                              //     backgroundImage: imageProvider,
-                              //   ),
-                              //   errorWidget: (context, url, error) => Image.asset(
-                              //   'assets/icons/plester.png',
-                              //   height: 60.h,
-                              // ),
-                              // ),
                               if (user.photoURL == null) ...[
                                 Icon(
                                   Icons.person,
@@ -138,9 +128,14 @@ class _OtherPageState extends State<OtherPage> {
                           vertical: 24.h, horizontal: 12.w),
                       child: Column(
                         children: [
-                          _othersItem(Icons.settings, 'Pengaturan', (() {
-                            //TODO: ontap
-                          })),
+                          _othersItem(
+                            Icons.settings,
+                            'Pengaturan',
+                            (() async {
+                              Navigator.pushNamed(
+                                  context, SettingsPage.routeName);
+                            }),
+                          ),
                           Divider(
                             thickness: 0.5.h,
                           ),
@@ -161,7 +156,7 @@ class _OtherPageState extends State<OtherPage> {
                           })),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               );
