@@ -302,7 +302,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pushNamed(context, LoginPage.routeName);
+                                      Navigator.pop(context);
                                     },
                                 ),
                               ],

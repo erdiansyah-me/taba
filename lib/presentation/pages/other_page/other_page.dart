@@ -156,6 +156,7 @@ class _OtherPageState extends State<OtherPage> {
                           ),
                           _othersItem(Icons.logout, 'Logout', (() async {
                             await FirebaseAuth.instance.signOut();
+                            Navigator.pushReplacementNamed(context, Auth.routeName);
                           })),
                         ],
                       ),

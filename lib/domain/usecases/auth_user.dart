@@ -12,4 +12,7 @@ class AuthUser {
   Future<Either<Failure, String>> executeLogin(String email, String password) {
     return repository.loginUser(email, password);
   }
+  Future<bool> logout() {
+    return repository.logout();
+  }
 }

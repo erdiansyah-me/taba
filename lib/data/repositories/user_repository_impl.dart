@@ -53,7 +53,7 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<Either<Failure, UserData>> userData() async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
+      final user = firebaseAuth.currentUser;
 
       return Right(
         UserData(
@@ -66,5 +66,43 @@ class UserRepositoryImpl extends UserRepository {
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
+  }
+  
+  @override
+  Future<Either<Failure, String>> editEmail(String newEmail, String password) async {
+    try {
+      final user = firebaseAuth.currentUser;
+
+
+      final credential = EmailAuthProvider.credential(email: user!.email!, password: password);
+      await user.reauthenticateWithCredential(credential);
+      await user.updateEmail(newEmail);
+
+      return const Right('Edit Email, silahkan cek kotak masuk Email anda');
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthFailure(e.message!));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, String>> editPassword(String newPassword, String oldPassword) async {
+    try {
+      final user = firebaseAuth.currentUser;
+
+      final credential = EmailAuthProvider.credential(email: user!.email!, password: oldPassword);
+
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
+
+      return const Right('Edit Password Berhasil');
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthFailure(e.message!));
+    }
+  }
+  
+  @override
+  Future<bool> logout() async {
+    await firebaseAuth.signOut();
+    return true;
   }
 }

@@ -12,13 +12,14 @@ import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/auth_page/register_page.dart';
 import 'package:taba/presentation/pages/home_page/home_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
+import 'package:taba/presentation/pages/maps_page/maps_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_page.dart';
 import 'package:taba/presentation/pages/settings_page/settings_page.dart';
 import 'package:taba/utils/style_config.dart';
 import 'package:taba/injection.dart' as di;
 
-import 'data/preferences/preferences_helper.dart';
+import 'utils/preferences/preferences_helper.dart';
 import 'presentation/provider/preferences_provider.dart';
 
 void main() async {
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (_) => di.locator<UserDataCubit>(),
         ),
+        BlocProvider(create: (_) => di.locator<MapsCubit>(),
+        ),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {
@@ -69,7 +72,6 @@ class MyApp extends StatelessWidget {
               );
             },
             home: const Auth(),
-
               routes: {
                 Auth.routeName:(context) => const Auth(),
                 LoginPage.routeName:(context) => const LoginPage(),

@@ -34,6 +34,16 @@ class AuthCubit extends Cubit<AuthState> {
       },
     );
   }
+
+  Future<void> logout() async {
+    emit(AuthLoading());
+    final result = await _authUser.logout();
+    if (result) {
+      emit(AuthSuccessLogout());
+    } else {
+      emit(AuthErrorLogout('Logout error'));
+    }
+  }
 }
 
 abstract class AuthState extends Equatable {
@@ -48,6 +58,16 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {}
+
+class AuthSuccessLogout extends AuthState {}
+
+class AuthErrorLogout extends AuthState {
+  final String message;
+  AuthErrorLogout(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
 
 class AuthError extends AuthState {
   final String message;
