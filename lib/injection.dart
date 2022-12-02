@@ -8,11 +8,14 @@ import 'package:taba/domain/usecases/auth_user.dart';
 import 'package:taba/domain/usecases/edit_email_user.dart';
 import 'package:taba/domain/usecases/edit_password_user.dart';
 import 'package:taba/domain/usecases/get_list_gempa.dart';
+import 'package:taba/domain/usecases/get_list_p3k.dart';
 import 'package:taba/domain/usecases/get_user_data.dart';
 import 'package:taba/presentation/bloc/user_data_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
 import 'package:taba/presentation/pages/maps_page/maps_cubit.dart';
 import 'package:http/http.dart' as http;
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_cubit.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -21,6 +24,8 @@ void init() {
   locator.registerFactory(() => AuthCubit(locator()));
   locator.registerFactory(() => UserDataCubit(locator()));
   locator.registerFactory(() => MapsCubit(locator()));
+  locator.registerFactory(() => P3kListCubit(locator()));
+  locator.registerFactory(() => P3kSearchBloc(locator()));
 
   //usecase
   locator.registerLazySingleton(() => AuthUser(locator()));
@@ -28,6 +33,7 @@ void init() {
   locator.registerLazySingleton(() => EditEmailUser(locator()));
   locator.registerLazySingleton(() => EditPasswordUser(locator()));
   locator.registerLazySingleton(() => GetListGempa(locator()));
+  locator.registerLazySingleton(() => GetListP3k(locator()));
 
   //repository
   locator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());

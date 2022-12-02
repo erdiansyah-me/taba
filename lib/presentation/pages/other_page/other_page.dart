@@ -142,12 +142,6 @@ class _OtherPageState extends State<OtherPage> {
                           Divider(
                             thickness: 0.5.h,
                           ),
-                          _othersItem(Icons.feedback, 'Kirim Feedback', (() {
-                            //TODO: ontap
-                          })),
-                          Divider(
-                            thickness: 0.5.h,
-                          ),
                           _othersItem(Icons.star, 'Credits', (() {
                             //TODO: ontap
                           })),

@@ -14,7 +14,11 @@ import 'package:taba/presentation/pages/home_page/home_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 import 'package:taba/presentation/pages/maps_page/maps_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_detail_page.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_cubit.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_page.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_bloc.dart';
+import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_page.dart';
 import 'package:taba/presentation/pages/settings_page/settings_page.dart';
 import 'package:taba/utils/style_config.dart';
 import 'package:taba/injection.dart' as di;
@@ -54,6 +58,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (_) => di.locator<MapsCubit>(),
         ),
+        BlocProvider(create: (_) => di.locator<P3kListCubit>(),
+        ),
+        BlocProvider(create: (_) => di.locator<P3kSearchBloc>(),
+        ),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {
@@ -80,6 +88,10 @@ class MyApp extends StatelessWidget {
                 ProfilePage.routeName: (context) => const ProfilePage(),
                 P3kListPage.routeName: (context) => const P3kListPage(),
                 RegisterPage.routeName: (context) => const RegisterPage(),
+                P3kListSearchPage.routeName: (context) => const P3kListSearchPage(),
+                P3kDetailPage.routeName:(context) => P3kDetailPage(
+                  urlDetail: ModalRoute.of(context)?.settings.arguments as String,
+                ),
               },
           );
         }
