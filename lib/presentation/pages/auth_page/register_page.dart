@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
+import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 

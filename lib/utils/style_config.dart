@@ -74,4 +74,5 @@ class ColorSystem {
   static const backgroundDark = Color.fromARGB(255, 30, 30, 30);
   static const primaryDark = Color.fromRGBO(14, 54, 45, 1.000);
   static const primaryLight = Color.fromRGBO(235, 247, 246, 1.000);
+  static const error = Color.fromRGBO(255, 95, 95, 1.000);
 }

@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:taba/presentation/pages/auth_page/bloc/auth_cubit.dart';
+import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
+import 'package:taba/presentation/pages/other_page/profile_page/edit_email_page/edit_email_page.dart';
 import 'package:taba/utils/style_config.dart';
 
 import '../../../bloc/user_data_cubit.dart';
 import '../../../provider/preferences_provider.dart';
 import '../../auth_page/auth.dart';
+import 'edit_password_page/edit_password_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -77,23 +79,23 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
           body: BlocBuilder<UserDataCubit, UserDataState>(
-              builder: (context, state) {
-            if (state is UserDataLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is UserDataSuccess) {
-              final user = state.result;
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 24.h),
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            if (user.photoURL == null) ...[
+            builder: (context, state) {
+              if (state is UserDataLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is UserDataSuccess) {
+                final user = state.result;
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: 24.h),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              if (user.photoURL == null) ...[
                                 Icon(
                                   Icons.person,
                                   size: 80.w,
@@ -110,78 +112,80 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ],
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            Text(
-                              user.displayName,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'opensans',
-                                fontWeight: FontWeight.w900,
-                                fontSize: 18.sp,
-                                color: Theme.of(context).focusColor,
+                              SizedBox(
+                                height: 8.h,
                               ),
-                            ),
-                            Text(
-                              user.email,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'opensans',
-                                color: ColorSystem.mediumGrey,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12.sp,
+                              Text(
+                                user.displayName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'opensans',
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 18.sp,
+                                  color: Theme.of(context).focusColor,
+                                ),
                               ),
-                            ),
-                          ],
+                              Text(
+                                user.email,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'opensans',
+                                  color: ColorSystem.mediumGrey,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor.withOpacity(0.6),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 24.h, horizontal: 12.w),
-                        child: Column(
-                          children: [
-                            _othersItem('Ubah Email Pengguna', (() {
-                              //TODO: ontap
-                            })),
-                            Divider(
-                              thickness: 0.5.h,
-                            ),
-                            _othersItem('Ubah Kata Sandi', (() {
-                              //TODO: ontap
-                            })),
-                            Divider(
-                              thickness: 0.5.h,
-                            ),
-                            _othersItem('Logout', (() async {
-                              context.read<AuthCubit>().logout();
-                            })),
-                          ],
-                        ),
+                      SizedBox(
+                        height: 24.h,
                       ),
-                    )
-                  ],
-                ),
-              );
-            } else if (state is UserDataError) {
-              return Center(
-                child: Text('Error: ${state.message}'),
-              );
-            } else {
-              return Container();
-            }
-          }),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor.withOpacity(0.6),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 24.h, horizontal: 12.w),
+                          child: Column(
+                            children: [
+                              _othersItem('Ubah Email Pengguna', (() {
+                                Navigator.pushNamed(context, EditEmailPage.routeName);
+                              })),
+                              Divider(
+                                thickness: 0.5.h,
+                              ),
+                              _othersItem('Ubah Kata Sandi', (() {
+                                Navigator.pushNamed(context, EditPasswordPage.routeName);
+                              })),
+                              Divider(
+                                thickness: 0.5.h,
+                              ),
+                              _othersItem('Logout', (() async {
+                                context.read<AuthCubit>().logout();
+                                Navigator.pushReplacementNamed(context, Auth.routeName);
+                              })),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else if (state is UserDataError) {
+                return Center(
+                  child: Text('Error: ${state.message}'),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
     );

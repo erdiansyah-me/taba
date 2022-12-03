@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.only(left: 8.h, top: 12.h),
                     child: Text(
-                      'Selamat ${getCurrentTime()}, ${state.result.displayName}!',
+                      'Selamat ${getCurrentTime()}, ${state.result.displayName} !',
                       style: TextStyle(
                         fontFamily: 'opensans',
                         fontWeight: FontWeight.w900,
