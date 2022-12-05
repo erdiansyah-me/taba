@@ -83,6 +83,22 @@ class UserRepositoryImpl extends UserRepository {
       return Left(AuthFailure(e.message!));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> editUsername(String newUsername, String password) async {
+    try {
+      final user = firebaseAuth.currentUser;
+
+
+      final credential = EmailAuthProvider.credential(email: user!.email!, password: password);
+      await user.reauthenticateWithCredential(credential);
+      await user.updateDisplayName(newUsername);
+
+      return const Right('Edit Username');
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthFailure(e.message!));
+    }
+  }
   
   @override
   Future<Either<Failure, String>> editPassword(String newPassword, String oldPassword) async {

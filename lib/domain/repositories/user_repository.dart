@@ -11,5 +11,6 @@ abstract class UserRepository {
   Future<Either<Failure, UserData>> userData();
   Future<Either<Failure, String>> editEmail(String newEmail, String password);
   Future<Either<Failure, String>> editPassword(String newPassword, String oldPassword);
+  Future<Either<Failure, String>> editUsername(String newUsername, String password);
   Future<bool> logout();
 }

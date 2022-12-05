@@ -15,6 +15,7 @@ import '../../../bloc/user_data_cubit.dart';
 import '../../../provider/preferences_provider.dart';
 import '../../auth_page/auth.dart';
 import 'edit_password_page/edit_password_page.dart';
+import 'edit_username_page/edit_username_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -70,6 +71,8 @@ class _ProfilePageState extends State<ProfilePage> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               //TODO: onpressed
+              Navigator.pushNamed(context, EditUsernamePage.routeName);
+
             },
             backgroundColor: ColorSystem.secondary,
             child: const Icon(

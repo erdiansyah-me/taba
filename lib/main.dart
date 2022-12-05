@@ -10,13 +10,14 @@ import 'package:taba/presentation/pages/auth_page/auth.dart';
 import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
 import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/auth_page/register_page.dart';
-import 'package:taba/presentation/pages/home_page/home_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 import 'package:taba/presentation/pages/maps_page/maps_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_email_page/edit_email_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_email_page/edit_email_page.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_password_page/edit_password_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_password_page/edit_password_page.dart';
+import 'package:taba/presentation/pages/other_page/profile_page/edit_username_page/edit_username_cubit.dart';
+import 'package:taba/presentation/pages/other_page/profile_page/edit_username_page/edit_username_page.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/is_success_page.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_detail_page.dart';
@@ -26,7 +27,6 @@ import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_b
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_page.dart';
 import 'package:taba/presentation/pages/settings_page/settings_page.dart';
 import 'package:taba/utils/is_success_args.dart';
-import 'package:taba/utils/style_config.dart';
 import 'package:taba/injection.dart' as di;
 
 import 'utils/preferences/preferences_helper.dart';
@@ -78,6 +78,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (_) => di.locator<EditPasswordCubit>(),
           ),
+          BlocProvider(
+            create: (_) => di.locator<EditUsernameCubit>(),
+          ),
         ],
         child:
             Consumer<PreferencesProvider>(builder: (context, provider, child) {
@@ -112,6 +115,7 @@ class MyApp extends StatelessWidget {
                   ),
               EditPasswordPage.routeName: (context) => const EditPasswordPage(),
               EditEmailPage.routeName: (context) => const EditEmailPage(),
+              EditUsernamePage.routeName: (context) => const EditUsernamePage(),
               IsSuccessPage.routeName: (context) => IsSuccessPage(
                 isSuccessArgs: ModalRoute.of(context)?.settings.arguments as IsSuccessArgs
               ),

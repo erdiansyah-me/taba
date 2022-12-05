@@ -3,7 +3,6 @@
 //     final gempaResponse = gempaResponseFromJson(jsonString);
 
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:taba/domain/entities/gempa_entity.dart';

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:taba/data/models/gempa_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:taba/data/models/p3k_list_response.dart';
