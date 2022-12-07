@@ -7,7 +7,7 @@ class MapsCubit extends Cubit<MapsState> {
   final GetListGempa _getListGempa;
 
   MapsCubit(this._getListGempa) : super(MapsInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> getListGempa() async {

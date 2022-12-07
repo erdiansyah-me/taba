@@ -7,7 +7,7 @@ class EditUsernameCubit extends Cubit<EditUsernameState> {
   final EditUsernameUser _editDisplayName;
 
   EditUsernameCubit(this._editDisplayName) : super(EditUsernameInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> editUsername(String newUsername, String password) async {

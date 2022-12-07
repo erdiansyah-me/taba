@@ -1,10 +1,7 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 import 'package:taba/utils/is_success_args.dart';
 
 import '../../../provider/preferences_provider.dart';
@@ -59,7 +56,8 @@ class _IsSuccessPageState extends State<IsSuccessPage> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             leading: IconButton(
-              onPressed: () => ModalRoute.withName(widget.isSuccessArgs.navigateTo),
+              onPressed: () =>
+                  ModalRoute.withName(widget.isSuccessArgs.navigateTo),
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Theme.of(context).focusColor,
@@ -118,15 +116,15 @@ class _IsSuccessPageState extends State<IsSuccessPage> {
                 ),
                 if (widget.isSuccessArgs.message != null) ...[
                   Text(
-                  'Error : ${widget.isSuccessArgs.message}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'opensans',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context).focusColor,
-                  ),
-                )
+                    'Error : ${widget.isSuccessArgs.message}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'opensans',
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).focusColor,
+                    ),
+                  )
                 ],
               ],
               SizedBox(

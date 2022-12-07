@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_cubit.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_bloc.dart';
-import 'package:taba/presentation/widget/grid_card_item.dart';
 import 'package:taba/utils/style_config.dart';
-
-import 'p3k_detail_page.dart';
+import 'package:flutter/cupertino.dart';
+import '../../detail_page/detail_page.dart';
 
 class P3kListSearchPage extends StatefulWidget {
   static const routeName = '/p3klist_page/search';
@@ -83,14 +82,27 @@ class _P3kListSearchPageState extends State<P3kListSearchPage> {
                 BlocBuilder<P3kSearchBloc, P3kSearchState>(
                   builder: (context, state) {
                     if (state is P3kSearchInitial) {
-                      return const Expanded(
+                      return Expanded(
                         child: Center(
-                          child: Text('Silahkan Cari Artikel \nmengenai P3K yang anda inginkan', textAlign: TextAlign.center,),
+                          child: Text('Silahkan Cari Artikel \nmengenai P3K yang anda inginkan', textAlign: TextAlign.center,style: TextStyle(color: Theme.of(context).focusColor),),
                         ),
                       );
                     } else if (state is P3kSearchLoading) {
                       return const Center(
                         child: CircularProgressIndicator(),
+                      );
+                    } else if (state is P3kSearchEmpty) {
+                      return Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/search_empty.png', width: (0.5 * MediaQuery.of(context).size.width),),
+                              SizedBox(height: 12.h,),
+                              Text(state.message, textAlign: TextAlign.center,style: TextStyle(color: Theme.of(context).focusColor),),
+                            ],
+                          ),
+                        ),
                       );
                     } else if (state is P3kSearchLoaded) {
                       return Expanded(
@@ -103,7 +115,7 @@ class _P3kListSearchPageState extends State<P3kListSearchPage> {
                                 (p3klist) => gridCardItem(
                                   () => {
                                     Navigator.pushNamed(
-                                        context, P3kDetailPage.routeName,
+                                        context, DetailPage.routeName,
                                         arguments: p3klist.linkToDetail)
                                   },
                                   p3klist.urlPhoto,

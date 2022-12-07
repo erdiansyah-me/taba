@@ -7,7 +7,7 @@ class UserDataCubit extends Cubit<UserDataState> {
   final GetUserData _getUserData;
 
   UserDataCubit(this._getUserData) : super(UserDataInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> getUserData() async {

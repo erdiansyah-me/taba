@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
@@ -9,7 +7,7 @@ import 'package:taba/presentation/pages/maps_page/maps_page.dart';
 import 'package:taba/presentation/pages/other_page/other_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_page.dart';
 import 'package:taba/utils/style_config.dart';
-
+import 'package:flutter/cupertino.dart';
 class MainPage extends StatefulWidget {
   static const routeName = '/main_page';
 
@@ -38,9 +36,7 @@ class _MainPageState extends State<MainPage> {
     ScreenUtil.init(context);
     return SafeArea(
       child: BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {
-          
-        },
+        listener: (context, state) {},
         child: Scaffold(
           body: _listPages[_bottomNavIndex],
           bottomNavigationBar: BottomNavigationBar(

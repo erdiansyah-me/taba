@@ -5,23 +5,23 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/utils/style_config.dart';
 
-import '../../../provider/preferences_provider.dart';
+import '../../provider/preferences_provider.dart';
 
-class P3kDetailPage extends StatefulWidget {
-  static const routeName = '/p3klist_page/detail';
+class DetailPage extends StatefulWidget {
+  static const routeName = '/detail';
 
   String urlDetail;
 
-  P3kDetailPage({
+  DetailPage({
     Key? key,
     required this.urlDetail,
   }) : super(key: key);
 
   @override
-  State<P3kDetailPage> createState() => _P3kDetailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _P3kDetailPageState extends State<P3kDetailPage> {
+class _DetailPageState extends State<DetailPage> {
   InAppWebViewController? webViewController;
   PullToRefreshController? pullToRefreshController;
   double progress = 0;
@@ -50,7 +50,7 @@ class _P3kDetailPageState extends State<P3kDetailPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('P3K'),
+          title: const Text('Artikel'),
         ),
         body: Column(
           children: [
@@ -77,6 +77,21 @@ class _P3kDetailPageState extends State<P3kDetailPage> {
                     onLoadStop: (controller, url) async {
                       pullToRefreshController?.endRefreshing();
                     },
+                    onLoadStart: (controller, url) {
+                      pullToRefreshController?.beginRefreshing();
+                    },
+                    onLoadError: (controller, url, code, message) {
+                      pullToRefreshController?.endRefreshing();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('$code : $message ')),
+                      );
+                    },
+                    onLoadHttpError: (controller, url, statusCode, description) {
+                      pullToRefreshController?.endRefreshing();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('$statusCode : $description ')),
+                      );
+                    },
                     onProgressChanged: (controller, progress) {
                       if (progress == 100) {
                         pullToRefreshController?.endRefreshing();
@@ -94,7 +109,7 @@ class _P3kDetailPageState extends State<P3kDetailPage> {
                     },
                   ),
                   progress < 1.0
-                      ? LinearProgressIndicator(value: progress)
+                      ? CircularProgressIndicator(value: progress)
                       : Container(),
                 ],
               ),

@@ -1,9 +1,8 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/utils/style_config.dart';
-
+import 'package:flutter/cupertino.dart';
 import '../../provider/preferences_provider.dart';
 import '../../widget/platform_widget.dart';
 

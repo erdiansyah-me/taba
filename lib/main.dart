@@ -20,7 +20,7 @@ import 'package:taba/presentation/pages/other_page/profile_page/edit_username_pa
 import 'package:taba/presentation/pages/other_page/profile_page/edit_username_page/edit_username_page.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/is_success_page.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
-import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_detail_page.dart';
+import 'package:taba/presentation/pages/detail_page/detail_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_cubit.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_bloc.dart';
@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
               RegisterPage.routeName: (context) => const RegisterPage(),
               P3kListSearchPage.routeName: (context) =>
                   const P3kListSearchPage(),
-              P3kDetailPage.routeName: (context) => P3kDetailPage(
+              DetailPage.routeName: (context) => DetailPage(
                     urlDetail:
                         ModalRoute.of(context)?.settings.arguments as String,
                   ),

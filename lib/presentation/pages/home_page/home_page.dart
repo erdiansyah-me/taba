@@ -1,16 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/presentation/bloc/user_data_cubit.dart';
-import 'package:taba/presentation/pages/auth_page/register_page.dart';
 import 'package:taba/presentation/provider/preferences_provider.dart';
-
+import 'package:flutter/cupertino.dart';
 import '../../../utils/style_config.dart';
+import '../detail_page/detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,9 +19,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<UserDataCubit>().getUserData());
+    Future.microtask(() => context.read<UserDataCubit>().getUserData());
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,13 +48,13 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: BlocBuilder<UserDataCubit, UserDataState>(
-            builder: (context, state) {
-              if (state is UserDataLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is UserDataSuccess) {
-                return Column(
+              builder: (context, state) {
+            if (state is UserDataLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is UserDataSuccess) {
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -66,11 +62,10 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       'Selamat ${getCurrentTime()}, ${state.result.displayName} !',
                       style: TextStyle(
-                        fontFamily: 'opensans',
-                        fontWeight: FontWeight.w900,
-                        fontSize: 16.sp,
-                        color: Theme.of(context).focusColor
-                      ),
+                          fontFamily: 'opensans',
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16.sp,
+                          color: Theme.of(context).focusColor),
                     ),
                   ),
                   SizedBox(
@@ -89,70 +84,78 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
                     child: Image.asset('assets/images/home_pic.png'),
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h,),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 8.h,
+                      ),
                       child: Column(
                         children: [
-                          _listItem(
-                            context,
-                            'assets/icons/ic_kategori.png',
-                            'Kategori Bencana',
-                            'Kenali beberapa kategori bencana alam yang dapat terjadi agar kita lebih waspada dan tetap tenang',
-                            (() {
-
-                            })
+                          SizedBox(
+                            height: 8.h,
                           ),
-                          SizedBox(height: 8.h,),
                           _listItem(
-                            context,
-                            'assets/icons/ic_evac.png',
-                            'Evakuasi? Tetap tenang dan sesuai prosedur',
-                            'Evakuasi massa yang sembarangan dan tidak teratur membuat proses evakuasi menjadi terhambat!',
-                            (() {
-                              
-                            })
+                              context,
+                              'assets/icons/ic_bencana.png',
+                              'Apa itu Bencana?',
+                              'Apa itu bencana? apa saja kategori bencana? Yuk, mari kita belajar dan tetap waspada terhadap bencana bencana yang bisa terjadi kapan saja',
+                              (() {
+                            Navigator.pushNamed(context, DetailPage.routeName,
+                                arguments:
+                                    'https://bnpb.go.id/definisi-bencana');
+                          })),
+                          SizedBox(
+                            height: 8.h,
                           ),
-                          SizedBox(height: 8.h,),
                           _listItem(
-                            context,
-                            'assets/icons/ic_important.png',
-                            'Ketahui Nomor Instansi Darurat!',
-                            'Pentingnya Mengetahui tentang nomor instansi darurat terdekat, agar penanganan lebih cepat!',
-                            (() {
-                              
-                            })
+                              context,
+                              'assets/icons/ic_kategori.png',
+                              'Waspada Gempa Bumi!',
+                              'Mari waspada dan siaga juga kenali apa yang sebaiknya dilakukan sebelum, saat, dan sesudah gempa bumi',
+                              (() {
+                            Navigator.pushNamed(context, DetailPage.routeName,
+                                arguments:
+                                    'https://www.bmkg.go.id/gempabumi/antisipasi-gempabumi.bmkg');
+                          })),
+                          SizedBox(
+                            height: 8.h,
                           ),
+                          _listItem(
+                              context,
+                              'assets/images/logo112.png',
+                              'Ketahui Nomor Instansi Darurat!',
+                              'Pentingnya Mengetahui tentang nomor instansi darurat, agar penanganan lebih cepat!',
+                              (() {
+                            Navigator.pushNamed(context, DetailPage.routeName,
+                                arguments:
+                                    'https://layanan112.kominfo.go.id/tentang#:~:text=Kondisi%20saat%20ini%20beberapa%20nomor,Pemerintah%20Pusat%20masih%20bisa%20digunakan');
+                          })),
                         ],
                       ),
                     ),
                   ),
                 ],
               );
-              } else if (state is UserDataError) {
-                return Center(
-                  child: Text('Error: ${state.message}'),
-                );
-              } else {
-                return Container();
-              }
+            } else if (state is UserDataError) {
+              return Center(
+                child: Text('Error: ${state.message}'),
+              );
+            } else {
+              return Container();
             }
-          ),
+          }),
         ),
       ),
     );
   }
 
-  Widget _listItem(
-    BuildContext context,
-    String icon,
-    String title,
-    String subtitle,
-    Function() onTap
-  ) {
+  Widget _listItem(BuildContext context, String icon, String title,
+      String subtitle, Function() onTap) {
     return InkWell(
       // hoverColor: Theme.of(context).backgroundColor,
       onTap: onTap,
@@ -177,7 +180,9 @@ class _HomePageState extends State<HomePage> {
               icon,
               width: 60.w,
             ),
-            SizedBox(width: 8.w,),
+            SizedBox(
+              width: 8.w,
+            ),
             Expanded(
               child: Column(children: [
                 Text(
@@ -201,7 +206,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
             ),
-            const Icon(Icons.arrow_forward_ios)
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).focusColor,
+            ),
           ],
         ),
       ),

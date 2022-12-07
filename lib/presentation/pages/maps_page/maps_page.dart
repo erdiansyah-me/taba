@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -8,6 +7,7 @@ import 'package:taba/domain/entities/gempa_entity.dart';
 import 'package:taba/presentation/pages/maps_page/maps_cubit.dart';
 import 'package:taba/utils/style_config.dart';
 import 'package:taba/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 
 class MapsPage extends StatefulWidget {
   const MapsPage({super.key});
@@ -56,6 +56,7 @@ class _MapsPageState extends State<MapsPage> {
                       return Marker(
                         point: LatLng(coordinates[0], coordinates[1]),
                         builder: (context) {
+                          // ignore: sized_box_for_whitespace
                           return Container(
                             height: 80.h,
                             width: 80.w,
@@ -63,17 +64,21 @@ class _MapsPageState extends State<MapsPage> {
                               onPressed: () {
                                 showGeneralDialog(
                                   context: context,
-                                  barrierDismissible: true, 
+                                  barrierDismissible: true,
                                   barrierLabel:
-                                    MaterialLocalizations.of(context).modalBarrierDismissLabel,
-                                  pageBuilder: (context, animation, secondaryAnimation) {
-                                  return SimpleDialog(
-                                    contentPadding: EdgeInsets.symmetric(vertical: 8.h),
-                                    children: [
-                                      popUpWindow(context, gempa),
-                                    ],
-                                  );
-                                },);
+                                      MaterialLocalizations.of(context)
+                                          .modalBarrierDismissLabel,
+                                  pageBuilder:
+                                      (context, animation, secondaryAnimation) {
+                                    return SimpleDialog(
+                                      contentPadding:
+                                          EdgeInsets.symmetric(vertical: 8.h),
+                                      children: [
+                                        popUpWindow(context, gempa),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                               icon: const Icon(
                                 Icons.location_on,
@@ -119,6 +124,7 @@ class _MapsPageState extends State<MapsPage> {
               ),
             ),
           ),
+          SizedBox(height: 8.h,),
           Text(
             gempa.wilayah,
             textAlign: TextAlign.center,
@@ -129,12 +135,13 @@ class _MapsPageState extends State<MapsPage> {
               color: Theme.of(context).focusColor,
             ),
           ),
+          SizedBox(height: 8.h,),
           Table(
             columnWidths: const {
-                0: FlexColumnWidth(3),
-                1: FlexColumnWidth(1),
-                2: FlexColumnWidth(5),
-              },
+              0: FlexColumnWidth(3),
+              1: FlexColumnWidth(1),
+              2: FlexColumnWidth(5),
+            },
             children: [
               TableRow(
                 children: [

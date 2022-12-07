@@ -6,7 +6,7 @@ class EditEmailCubit extends Cubit<EditEmailState> {
   final EditEmailUser _editEmailUser;
 
   EditEmailCubit(this._editEmailUser) : super(EditEmailInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> editEmail(String newEmail, String password) async {

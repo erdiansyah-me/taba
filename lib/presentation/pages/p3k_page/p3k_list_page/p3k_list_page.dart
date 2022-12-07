@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_detail_page.dart';
+import 'package:taba/presentation/pages/detail_page/detail_page.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_cubit.dart';
 import 'package:taba/presentation/pages/p3k_page/p3k_list_page/p3k_list_search_page.dart';
-import 'package:taba/presentation/widget/grid_card_item.dart';
 import 'package:taba/utils/style_config.dart';
+import 'package:flutter/cupertino.dart';
 
 class P3kListPage extends StatefulWidget {
   static const routeName = '/p3klist_page';
@@ -92,7 +92,7 @@ class _P3kListPageState extends State<P3kListPage> {
                             (p3klist) => gridCardItem(
                               () => {
                                 Navigator.pushNamed(
-                                    context, P3kDetailPage.routeName,
+                                    context, DetailPage.routeName,
                                     arguments: p3klist.linkToDetail)
                               },
                               p3klist.urlPhoto,

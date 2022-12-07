@@ -1,12 +1,9 @@
-import 'dart:io' as io;
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:taba/data/database/database_service.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
 import '../../../../../utils/is_success_args.dart';
 import '../../../../../utils/style_config.dart';
@@ -14,6 +11,7 @@ import '../../../../bloc/user_data_cubit.dart';
 import '../../../../provider/preferences_provider.dart';
 import '../is_success_page.dart';
 import 'edit_username_cubit.dart';
+import 'package:flutter/cupertino.dart';
 
 class EditUsernamePage extends StatefulWidget {
   static const routeName = '/profile_page/edit_username_page';
@@ -25,9 +23,6 @@ class EditUsernamePage extends StatefulWidget {
 }
 
 class _EditUsernamePageState extends State<EditUsernamePage> {
-  set imagePath(String imagePath) {}
-  late String photoURL;
-  final _usernameController = TextEditingController();
 
   final _editUsernameFormKey = GlobalKey<FormState>();
   final _newUsernameController = TextEditingController();
@@ -79,7 +74,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                       .of(context)
                       .focusColor,
                 )),
-            title: const Text('Ubah Username'),
+            title: const Text('Ubah Nama Pengguna'),
             centerTitle: false,
           ),
           resizeToAvoidBottomInset: false,
@@ -137,29 +132,6 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                             SizedBox(
                               height: 8.h,
                             ),
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                  MaterialStateProperty
-                                      .resolveWith((states) =>
-                                  ColorSystem.secondary ),
-                                  shape: MaterialStateProperty
-                                      .resolveWith((states) =>
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(
-                                            25.r),
-                                      )),
-                                ),
-                              child: const Text('Upload Image'),
-                              onPressed: () async {
-                                io.File file = (await getImage());
-                                photoURL = await DatabaseServices.uploadImage(file);
-                                setState(() {
-                                  getImage();
-                                });
-                              },
-                            )
                           ],
                         ),
                       ),
@@ -174,7 +146,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                               IsSuccessPage.routeName,
                               arguments: IsSuccessArgs(
                                 isSuccess: true,
-                                konteks: 'Username',
+                                konteks: 'Nama pengguna',
                                 navigateTo: ProfilePage.routeName,
                               ),
                             );
@@ -184,7 +156,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                               IsSuccessPage.routeName,
                               arguments: IsSuccessArgs(
                                 isSuccess: false,
-                                konteks: 'Username',
+                                konteks: 'Nama pengguna',
                                 navigateTo: ProfilePage.routeName,
                                 message: state.message,
                               ),
@@ -235,12 +207,12 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                               validator: (value) {
                                                 if (value == null ||
                                                     value.isEmpty) {
-                                                  return 'mohon masukkan username';
+                                                  return 'mohon masukkan nama pengguna';
                                                 }
                                                 return null;
                                               },
                                               decoration: InputDecoration(
-                                                hintText: 'username baru',
+                                                hintText: 'nama pengguna baru',
                                                 hintStyle: TextStyle(
                                                   fontFamily: 'opensans',
                                                   color: Theme
@@ -413,8 +385,5 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
       ),
     );
   }
-}
-Future<io.File> getImage() async {
-  return await ImagePicker.pickImage(source: ImageSource.gallery);
 }
 

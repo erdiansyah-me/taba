@@ -9,7 +9,7 @@ class P3kListCubit extends Cubit<P3kListState> {
   final GetListP3k _getListP3k;
 
   P3kListCubit(this._getListP3k) : super(P3kListInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> getListP3k() async {

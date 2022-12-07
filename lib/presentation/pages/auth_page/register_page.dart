@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
-import 'package:taba/presentation/pages/auth_page/login_page.dart';
 import 'package:taba/presentation/pages/main_page/main_page.dart';
 
 import '../../../utils/style_config.dart';
@@ -19,7 +19,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -60,12 +59,16 @@ class _RegisterPageState extends State<RegisterPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 40.h,),
+                SizedBox(
+                  height: 40.h,
+                ),
                 Image.asset(
                   'assets/images/logo.png',
                   height: 180.h,
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(
+                  height: 12.h,
+                ),
                 Text(
                   'DAFTAR',
                   style: TextStyle(
@@ -109,7 +112,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintText: 'nama pengguna',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: Theme.of(context).secondaryHeaderColor,
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                     ),
@@ -146,7 +150,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintText: 'email',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: Theme.of(context).secondaryHeaderColor,
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                     ),
@@ -185,7 +190,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintText: 'kata sandi',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: Theme.of(context).secondaryHeaderColor,
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                       suffixIcon: isObscurePassword
@@ -247,7 +253,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintText: 'konfirmasi kata sandi',
                                       hintStyle: TextStyle(
                                         fontFamily: 'opensans',
-                                        color: Theme.of(context).secondaryHeaderColor,
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
                                       ),
                                       border: InputBorder.none,
                                       suffixIcon: isObscureConfirmPassword
@@ -312,30 +319,32 @@ class _RegisterPageState extends State<RegisterPage> {
                           ElevatedButton(
                             onPressed: () async {
                               if (_registerFormKey.currentState!.validate()) {
-                                
                                 context.read<AuthCubit>().registerUser(
                                       _usernameController.text,
                                       _emailController.text,
                                       _confirmPasswordController.text,
                                     );
                                 if (state is AuthLoading) {
-                                  const Center(child: CircularProgressIndicator());
+                                  const Center(
+                                      child: CircularProgressIndicator());
                                 }
                                 if (state is AuthSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text('Register Berhasil')),
                                   );
-                                  Navigator.pushReplacementNamed(context, MainPage.routeName);
+                                  Navigator.pushReplacementNamed(
+                                      context, MainPage.routeName);
                                 } else if (state is AuthError) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                        content: Text('Register Gagal: ${state.message}')),
+                                        content: Text(
+                                            'Register Gagal: ${state.message}')),
                                   );
                                 }
-                                  // ScaffoldMessenger.of(context).showSnackBar(
-                                  //   const SnackBar(
-                                  //       content: Text('Register Berhasil')));
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   const SnackBar(
+                                //       content: Text('Register Berhasil')));
                               }
                             },
                             style: ButtonStyle(

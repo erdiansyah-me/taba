@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taba/domain/entities/user_data.dart';
 import 'package:taba/domain/repositories/user_repository.dart';
 import 'package:taba/utils/failure.dart';
@@ -30,23 +29,6 @@ class UserRepositoryImpl extends UserRepository {
       return const Right('Login Berhasil');
     } on FirebaseAuthException catch (e) {
       return Left(AuthFailure(e.message!));
-    }
-  }
-
-  @override
-  Future<UserCredential> googleLogin() async {
-    try {
-      final googleAccount = await GoogleSignIn().signIn();
-      final googleAuth = await googleAccount?.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      return await firebaseAuth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.message);
     }
   }
 

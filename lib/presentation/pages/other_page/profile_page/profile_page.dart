@@ -1,8 +1,4 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:taba/presentation/pages/auth_page/cubit/auth_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_email_page/edit_email_page.dart';
 import 'package:taba/utils/style_config.dart';
-
+import 'package:flutter/cupertino.dart';
 import '../../../bloc/user_data_cubit.dart';
 import '../../../provider/preferences_provider.dart';
 import '../../auth_page/auth.dart';
@@ -70,9 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              //TODO: onpressed
               Navigator.pushNamed(context, EditUsernamePage.routeName);
-
             },
             backgroundColor: ColorSystem.secondary,
             child: const Icon(
@@ -158,20 +152,23 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Column(
                             children: [
                               _othersItem('Ubah Email Pengguna', (() {
-                                Navigator.pushNamed(context, EditEmailPage.routeName);
+                                Navigator.pushNamed(
+                                    context, EditEmailPage.routeName);
                               })),
                               Divider(
                                 thickness: 0.5.h,
                               ),
                               _othersItem('Ubah Kata Sandi', (() {
-                                Navigator.pushNamed(context, EditPasswordPage.routeName);
+                                Navigator.pushNamed(
+                                    context, EditPasswordPage.routeName);
                               })),
                               Divider(
                                 thickness: 0.5.h,
                               ),
                               _othersItem('Logout', (() async {
                                 context.read<AuthCubit>().logout();
-                                Navigator.pushReplacementNamed(context, Auth.routeName);
+                                Navigator.pushReplacementNamed(
+                                    context, Auth.routeName);
                               })),
                             ],
                           ),

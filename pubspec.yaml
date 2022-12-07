@@ -53,7 +53,7 @@ dependencies:
   html: ^0.15.1
   flutter_inappwebview: ^5.7.2+1
   firebase_storage: ^11.0.6
-  image_picker: ^0.6.5
+  image_picker: ^0.8.6
   cloud_firestore: ^4.1.0
 
 

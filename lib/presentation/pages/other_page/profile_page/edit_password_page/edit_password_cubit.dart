@@ -6,7 +6,7 @@ class EditPasswordCubit extends Cubit<EditPasswordState> {
   final EditPasswordUser _editPasswordUser;
 
   EditPasswordCubit(this._editPasswordUser) : super(EditPasswordInitial());
-  String _message = '';
+  final String _message = '';
   String get message => _message;
 
   Future<void> editPassword(String newPassword, String password) async {

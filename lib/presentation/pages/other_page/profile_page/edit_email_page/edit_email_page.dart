@@ -1,17 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/edit_email_page/edit_email_cubit.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
-
+import 'package:flutter/cupertino.dart';
 import '../../../../../utils/is_success_args.dart';
 import '../../../../../utils/style_config.dart';
 import '../../../../bloc/user_data_cubit.dart';
 import '../../../../provider/preferences_provider.dart';
-import '../../../main_page/main_page.dart';
 import '../is_success_page.dart';
 
 class EditEmailPage extends StatefulWidget {
