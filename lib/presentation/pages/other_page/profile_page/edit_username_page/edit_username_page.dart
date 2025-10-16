@@ -1,10 +1,13 @@
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:taba/presentation/pages/other_page/profile_page/profile_page.dart';
+import 'package:taba/presentation/widget/image_picker_widget.dart';
 import '../../../../../utils/is_success_args.dart';
 import '../../../../../utils/style_config.dart';
 import '../../../../bloc/user_data_cubit.dart';
@@ -23,7 +26,6 @@ class EditUsernamePage extends StatefulWidget {
 }
 
 class _EditUsernamePageState extends State<EditUsernamePage> {
-
   final _editUsernameFormKey = GlobalKey<FormState>();
   final _newUsernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -37,24 +39,13 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              if (Provider
-                  .of<PreferencesProvider>(context)
-                  .isDarkTheme) ...[
-                Theme
-                    .of(context)
-                    .backgroundColor,
-                Theme
-                    .of(context)
-                    .backgroundColor,
-              ] else
-                ...[
-                  Theme
-                      .of(context)
-                      .primaryColor,
-                  Theme
-                      .of(context)
-                      .backgroundColor,
-                ],
+              if (Provider.of<PreferencesProvider>(context).isDarkTheme) ...[
+                Theme.of(context).backgroundColor,
+                Theme.of(context).backgroundColor,
+              ] else ...[
+                Theme.of(context).primaryColor,
+                Theme.of(context).backgroundColor,
+              ],
             ],
             center: Alignment.bottomLeft,
             stops: const [
@@ -70,9 +61,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                 onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: Theme
-                      .of(context)
-                      .focusColor,
+                  color: Theme.of(context).focusColor,
                 )),
             title: const Text('Ubah Nama Pengguna'),
             centerTitle: false,
@@ -96,26 +85,37 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            if (user.photoURL == null) ...[
-                              Icon(
-                                Icons.person,
-                                size: 80.w,
-                                color: Theme
-                                    .of(context)
-                                    .focusColor,
-                              )
-                            ] else
-                              ...[
-                                CachedNetworkImage(
-                                  imageUrl: user.photoURL!,
-                                  width: 60.w,
-                                  imageBuilder: (context, imageProvider) =>
-                                      CircleAvatar(
+                            InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (builder) => Wrap(children: [
+                                          ImagePickerWidget(),
+                                        ]));
+                              },
+                              child: Container(
+                                child: () {
+                                  if (user.photoURL == null) {
+                                    return Icon(
+                                      Icons.person,
+                                      size: 80.w,
+                                      color: Theme.of(context).focusColor,
+                                    );
+                                  } else {
+                                    return CachedNetworkImage(
+                                      imageUrl: user.photoURL!,
+                                      width: 60.w,
+                                      imageBuilder: (context, imageProvider) =>
+                                          CircleAvatar(
                                         backgroundImage: imageProvider,
                                         backgroundColor: Colors.transparent,
                                       ),
-                                ),
-                              ],
+                                    );
+                                  }
+                                }(),
+                              ),
+                            ),
                             SizedBox(
                               height: 8.h,
                             ),
@@ -163,7 +163,8 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                             );
                           }
                         },
-                        child: BlocBuilder<EditUsernameCubit, EditUsernameState>(
+                        child:
+                            BlocBuilder<EditUsernameCubit, EditUsernameState>(
                           builder: (context, state) {
                             return Form(
                               key: _editUsernameFormKey,
@@ -172,12 +173,11 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: Theme
-                                            .of(context)
+                                        color: Theme.of(context)
                                             .cardColor
                                             .withOpacity(0.6),
                                         borderRadius: const BorderRadius.all(
@@ -193,16 +193,15 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                               right: 8.w,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Theme
-                                                  .of(context)
+                                              color: Theme.of(context)
                                                   .dividerColor,
                                               borderRadius:
-                                              BorderRadius.circular(25.r),
+                                                  BorderRadius.circular(25.r),
                                             ),
                                             child: TextFormField(
-                                              controller: _newUsernameController,
-                                              cursorColor: Theme
-                                                  .of(context)
+                                              controller:
+                                                  _newUsernameController,
+                                              cursorColor: Theme.of(context)
                                                   .backgroundColor,
                                               validator: (value) {
                                                 if (value == null ||
@@ -215,8 +214,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                                 hintText: 'nama pengguna baru',
                                                 hintStyle: TextStyle(
                                                   fontFamily: 'opensans',
-                                                  color: Theme
-                                                      .of(context)
+                                                  color: Theme.of(context)
                                                       .secondaryHeaderColor,
                                                 ),
                                                 border: InputBorder.none,
@@ -230,17 +228,15 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                               right: 8.w,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Theme
-                                                  .of(context)
+                                              color: Theme.of(context)
                                                   .dividerColor,
                                               borderRadius:
-                                              BorderRadius.circular(25.r),
+                                                  BorderRadius.circular(25.r),
                                             ),
                                             child: TextFormField(
                                               controller: _passwordController,
                                               obscureText: isObscurePassword,
-                                              cursorColor: Theme
-                                                  .of(context)
+                                              cursorColor: Theme.of(context)
                                                   .backgroundColor,
                                               validator: (value) {
                                                 if (value == null ||
@@ -254,38 +250,37 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                                 hintText: 'kata sandi',
                                                 hintStyle: TextStyle(
                                                   fontFamily: 'opensans',
-                                                  color: Theme
-                                                      .of(context)
+                                                  color: Theme.of(context)
                                                       .secondaryHeaderColor,
                                                 ),
                                                 border: InputBorder.none,
                                                 suffixIcon: isObscurePassword
                                                     ? GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isObscurePassword =
-                                                      false;
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.visibility_off,
-                                                    color: ColorSystem
-                                                        .secondary,
-                                                  ),
-                                                )
+                                                        onTap: () {
+                                                          setState(() {
+                                                            isObscurePassword =
+                                                                false;
+                                                          });
+                                                        },
+                                                        child: const Icon(
+                                                          Icons.visibility_off,
+                                                          color: ColorSystem
+                                                              .secondary,
+                                                        ),
+                                                      )
                                                     : GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      isObscurePassword =
-                                                      true;
-                                                    });
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.visibility,
-                                                    color: ColorSystem
-                                                        .secondary,
-                                                  ),
-                                                ),
+                                                        onTap: () {
+                                                          setState(() {
+                                                            isObscurePassword =
+                                                                true;
+                                                          });
+                                                        },
+                                                        child: const Icon(
+                                                          Icons.visibility,
+                                                          color: ColorSystem
+                                                              .secondary,
+                                                        ),
+                                                      ),
                                               ),
                                             ),
                                           ),
@@ -295,7 +290,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                     SizedBox(height: 24.h),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
                                           onPressed: () {
@@ -303,16 +298,16 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                           },
                                           style: ButtonStyle(
                                             backgroundColor:
-                                            MaterialStateProperty
-                                                .resolveWith((states) =>
-                                            ColorSystem.error),
+                                                MaterialStateProperty
+                                                    .resolveWith((states) =>
+                                                        ColorSystem.error),
                                             shape: MaterialStateProperty
                                                 .resolveWith((states) =>
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      25.r),
-                                                )),
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25.r),
+                                                    )),
                                           ),
                                           child: Text(
                                             'Batal',
@@ -334,22 +329,23 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                                               context
                                                   .read<EditUsernameCubit>()
                                                   .editUsername(
-                                                  _newUsernameController.text,
-                                                  _passwordController.text);
+                                                      _newUsernameController
+                                                          .text,
+                                                      _passwordController.text);
                                             }
                                           },
                                           style: ButtonStyle(
                                             backgroundColor:
-                                            MaterialStateProperty
-                                                .resolveWith((states) =>
-                                            ColorSystem.secondary),
+                                                MaterialStateProperty
+                                                    .resolveWith((states) =>
+                                                        ColorSystem.secondary),
                                             shape: MaterialStateProperty
                                                 .resolveWith((states) =>
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      25.r),
-                                                )),
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25.r),
+                                                    )),
                                           ),
                                           child: Text(
                                             'Ubah',
@@ -386,4 +382,3 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
     );
   }
 }
-

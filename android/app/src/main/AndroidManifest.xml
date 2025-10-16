@@ -2,6 +2,7 @@
     package="com.example.taba">
    <application
         android:label="taba"
+        android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
